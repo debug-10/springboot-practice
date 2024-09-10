@@ -14,7 +14,9 @@
     <name>spring-boot-practice</name>
     <description>spring-boot-practice</description>
     <modules>
-        <module>untitled</module>
+
+        <module>spring-boot-thymeleaf</module>
+        <module>spring-boot-logging</module>
     </modules>
 
 

@@ -1,0 +1,9 @@
+logging:
+  level:
+    root: debug
+    top.guke.springboot.thymeleaf: debug
+
+
+spring:
+  thymeleaf:
+    cache: false #禁用 thymsleaf 缓存
