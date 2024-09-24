@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Data
 @Configuration
-@PropertySource("classpath:aliyun-oss.properties")
+//@PropertySource("classpath:aliyun-oss.properties")
 @ConfigurationProperties(prefix = "aliyun-oss")
 
 public class OssConfig {
