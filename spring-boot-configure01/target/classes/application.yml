@@ -64,6 +64,7 @@ spring:
     host: smtp.qq.com
     username: 2319780642@qq.com
     password: iwiicccnkhmvecbd
+
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true

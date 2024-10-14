@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//myhabits.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.guke.springboot.qasystem.mapper.QuestionMapper">
+
+    <!-- Result Map -->
+    <resultMap id="questionDetailMap" type="Question">
+        <association property="questions" javaType="Question">
+            <id column="question_id" property="questionId" jdbcType="INTEGER"/>
+            <result column="question_content" property="questionContent" jdbcType="VARCHAR"/>
+            <result column="user_id" property="userId" jdbcType="INTEGER"/>
+            <result column="question_created" property="questionCreated" jdbcType="TIMESTAMP"/>
+        </association>
+        <association property="users" javaType="User">
+            <id column="user_id" property="userId" jdbcType="INTEGER"/>
+            <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+            <result column="user_email" property="email" jdbcType="VARCHAR"/>
+        </association>
+        <collection property="answers" ofType="Answer">
+            <result column="answer_id" property="answerId" jdbcType="INTEGER"/>
+            <result column="answer_content" property="answerContent" jdbcType="VARCHAR"/>
+            <result column="user_id" property="userId" jdbcType="INTEGER"/>
+            <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        </collection>
+    </resultMap>
+
+    <!-- Select Query -->
+    <select id="getQuestionDetail" resultMap="questionDetailMap">
+        SELECT q.question_id, q.question_content, q.user_id AS asker_id,
+               u.user_name AS asker_name, u.email AS asker_email,
+               q.create_at,
+               a.answer_id, a.answer_content, a.user_id AS answer_user_id,
+               a.create_time AS answer_create_time
+        FROM t_question q
+                 LEFT JOIN user u ON q.user_id = u.user_id
+                 LEFT JOIN answer a ON q.question_id = a.question_id
+        WHERE q.question_id = #{questionId}
+    </select>
+
+
+
+</mapper>
