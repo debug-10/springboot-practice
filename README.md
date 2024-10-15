@@ -6,3 +6,4 @@
  - spring-boot-configure: 配置管理模块
  - spring-boot-database: 数据库模块
  - spring-boot-mp: MyBatis Plus模块
+ - spring-boot-exception: 异常处理模块

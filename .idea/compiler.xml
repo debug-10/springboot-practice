@@ -10,6 +10,7 @@
         <module name="spring-boot-thymeleaf" />
         <module name="untitled" />
         <module name="spring-boot-database01" />
+        <module name="spring-boot-exception" />
         <module name="spring-boot-configure01" />
         <module name="spring-boot-logging" />
         <module name="zhihu_api" />
@@ -27,6 +28,7 @@
       <module name="spring-boot-configure01" options="-parameters" />
       <module name="spring-boot-database" options="-parameters" />
       <module name="spring-boot-database01" options="-parameters" />
+      <module name="spring-boot-exception" options="-parameters" />
       <module name="spring-boot-logging" options="-parameters" />
       <module name="spring-boot-mp" options="-parameters" />
       <module name="spring-boot-practice" options="" />
