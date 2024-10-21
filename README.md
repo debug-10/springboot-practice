@@ -7,3 +7,4 @@
  - spring-boot-database: 数据库模块
  - spring-boot-mp: MyBatis Plus模块
  - spring-boot-exception: 异常处理模块
+ - spring-boot-redis: redis模块

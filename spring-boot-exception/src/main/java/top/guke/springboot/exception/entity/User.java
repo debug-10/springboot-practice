@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import top.guke.springboot.exception.annotation.Phone;
 
+
 @Data
 public class User{
     @NotBlank(message="用户名不能为空")
