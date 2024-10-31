@@ -6,7 +6,7 @@ import top.guke.springboot.qasystem.entity.Question;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class QuestionMapperTest {
+class QuestionControllerTest {
 
     @Resource
     private QuestionMapper questionMapper;

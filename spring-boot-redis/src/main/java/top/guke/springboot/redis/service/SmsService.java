@@ -1,5 +1,5 @@
 package top.guke.springboot.redis.service;
 
-public interface SmsServer {
+public interface SmsService {
     void sendSms(String phone);
 }

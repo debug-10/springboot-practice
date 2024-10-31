@@ -49,16 +49,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             user = new User();
             user.setNickname(phone);
             user.setPhone(phone);
-            user.setAvater("https://nit-soft.oss-cn-hangzhou.aliyuncs.com/avatar/me.png");
+            user.setAvatar("https://nit-soft.oss-cn-hangzhou.aliyuncs.com/avatar/me.png");
             user.setGender(0);
-            user.setEnable(AccountStatusEnum.ENABLED.getValue());
+            user.setEnabled(AccountStatusEnum.ENABLED.getValue());
             user.setBonus(100);
             user.setDeleteFlag(0);
             user.setRemark("这个人很懒，什么都没有写");
             baseMapper.insert(user);
         }
         // 用户被禁用
-        if (!user.getEnable().equals(AccountStatusEnum.ENABLED.getValue())) {
+        if (!user.getEnabled().equals(AccountStatusEnum.ENABLED.getValue())) {
             throw new ServerException(ErrorCode.ACCOUNT_DISABLED);
         }
         // 构造token
@@ -79,7 +79,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (ObjectUtils.isEmpty(user)) {
             return false;
         }
-        return user.getEnable().equals(AccountStatusEnum.ENABLED.getValue());
+        return user.getEnabled().equals(AccountStatusEnum.ENABLED.getValue());
     }
 
     @Override

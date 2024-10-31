@@ -11,12 +11,12 @@ public class User {
     @TableId(value = "pk_id" , type = IdType.AUTO)
     private Long pkId;
     private String phone;
-    private String avater;
+    private String avatar;
     private String nickname;
     private Integer gender;
     private Integer bonus;
     private String remark;
-    private Integer enable;
+    private Integer enabled;
 
     @TableField(value = "delete_flag",fill = FieldFill.INSERT)
     @TableLogic

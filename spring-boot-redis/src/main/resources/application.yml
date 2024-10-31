@@ -11,11 +11,10 @@ spring:
           max-idle: 20 #连接池中的最大空闲数,默认为 8
           max-active: 100 #连接池的最大连接数,默认为 8
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/spring_boot?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
-    username: root
-    password: password
-
+   url: jdbc:mysql://127.0.0.1:3306/spring_boot?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+   username: root
+   password: password
+   driver-class-name: com.mysql.cj.jdbc.Driver
 guke:
   sms:
     ccp:

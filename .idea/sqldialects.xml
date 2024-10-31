@@ -5,7 +5,9 @@
     <file url="file://$PROJECT_DIR$/spring-boot-database01/src/main/resources/mapper/CourseMapper.xml" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/spring-boot-database01/src/main/resources/mapper/StudentMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/spring-boot-database01/src/main/resources/mapper/TeacherMapper.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/spring-boot-qasystem/src/main/resources/mapper/AnswerMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/spring-boot-qasystem/src/main/resources/mapper/QuestionMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/spring-boot-qasystem/src/main/resources/mapper/UserMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/zhihu_api/src/main/resources/mapper/SpecialMapper.xml" dialect="GenericSQL" />
   </component>
 </project>

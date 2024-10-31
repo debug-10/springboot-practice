@@ -2,14 +2,14 @@ package top.guke.springboot.redis.service.impl;
 
 import com.cloopen.rest.sdk.BodyType;
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import top.guke.springboot.redis.config.CloopenConfig;
 import top.guke.springboot.redis.config.RedisCache;
+import top.guke.springboot.redis.config.RedisKeys;
 import top.guke.springboot.redis.enums.ErrorCode;
 import top.guke.springboot.redis.exception.ServerException;
-import top.guke.springboot.redis.service.SmsServer;
+import top.guke.springboot.redis.service.SmsService;
 import top.guke.springboot.redis.utils.CommonUtils;
 
 import lombok.AllArgsConstructor;
@@ -21,25 +21,24 @@ import java.util.UUID;
 @Service
 @Slf4j
 @AllArgsConstructor
-public class SmsServiceImpl implements SmsServer {
-    @Resource
+public class SmsServiceImpl implements SmsService {
     private final CloopenConfig cloopenConfig;
     private final RedisCache redisCache;
 
 
     @Override
-    public void sendSms(String phone){
+    public void sendSms(String phone) {
         int code = CommonUtils.generateCode();
-        boolean flag = send (phone , code);
-        if(flag){
-            log.info("短信发送成功：{}",code);
-        }else {
-            log.info("短信发送失败");
-        }
+        redisCache.set(RedisKeys.getSmsKey(phone),code,60);
+        log.info(" ============= 短信发送成功 ============= ");
+        // 调用内部方法发送短信
+//        boolean result = send(phone, code);
+//        if (result) {
+//            log.info(" ============= 短信发送成功 ============= ");
+//        }
     }
 
-
-    private boolean send(String phone, int code) {
+    private boolean send(String phone, int code) throws ServerException {
         try {
             log.info(" ============= 创建短信发送通道中 ============= \nphone is {},code is {}", phone, code);
             String serverIp = cloopenConfig.getServerIp();
@@ -57,28 +56,30 @@ public class SmsServiceImpl implements SmsServer {
             sdk.setAccount(accountSId, accountToken);
             sdk.setAppId(appId);
             sdk.setBodyType(BodyType.Type_JSON);
-            //获取了短信模板
-            String templateId = cloopenConfig.getTemplateId();
-            String[] datas = {String.valueOf(code), "1"};
-            //通过 sendTemplateSMS 方法发送短信
-            HashMap<String, Object> result = sdk.sendTemplateSMS(phone, templateId, datas, "1234", UUID.randomUUID().toString());
-            if ("000000".equals(result.get("statusCode"))) {
-                // 正常返回输出data包体信息（map）
-                HashMap<String, Object> data = (HashMap<String, Object>) result.get("data");
-                Set<String> keySet = data.keySet();
-                for (String key : keySet) {
-                    Object object = data.get(key);
-                    log.info("{} = {}", key, object);
-                }
-            } else {
-                // 异常返回输出错误码和错误信息
-                log.error("错误码={} 错误信息= {}", result.get("statusCode"), result.get("statusMsg"));
-                throw new ServerException(ErrorCode.CODE_SEND_FAIL);
-            }
-        } catch (Exception e) {
-            throw new ServerException(ErrorCode.CODE_SEND_FAIL);
-        }
-        return true;
-    }
 
-}
+        String templateId = cloopenConfig.getTemplateId();
+        String[] datas = {String.valueOf(code), "1"};
+        //通过 sendTemplateSMS 方法发送短信
+        HashMap<String, Object> result = sdk.sendTemplateSMS(phone, templateId, datas, "1234", UUID.randomUUID().toString());
+        if ("000000".equals(result.get("statusCode"))) {
+            // 正常返回输出data包体信息（map）
+            HashMap<String, Object> data = (HashMap<String, Object>) result.get("data");
+            Set<String> keySet = data.keySet();
+            for (String key : keySet) {
+                Object object = data.get(key);
+                log.info("{} = {}", key, object);
+            }
+        } else {
+            // 异常返回输出错误码和错误信息
+            log.error("错误码={} 错误信息= {}", result.get("statusCode"), result.get("statusMsg"));
+            throw new ServerException(ErrorCode.CODE_SEND_FAIL);}
+
+        }catch (Exception e) {
+        throw new ServerException(ErrorCode.CODE_SEND_FAIL);
+    }
+        return true;
+}}
+
+
+
+

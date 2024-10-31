@@ -9,12 +9,13 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-
-
+/**
+ * @author PC
+ */
 @Component
 public class RedisCache {
     @Resource
-    private RedisTemplate<String ,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 默认过期时长为24小时，单位：秒
@@ -44,11 +45,6 @@ public class RedisCache {
         set(key, value, DEFAULT_EXPIRE);
     }
 
-    public void expire(String key, long expire) {
-        //设置过期时间
-        redisTemplate.expire(key, expire, TimeUnit.SECONDS);
-    }
-
     public Object get(String key, long expire) {
         Object value = redisTemplate.opsForValue().get(key);
         if (expire != NOT_EXPIRE) {
@@ -60,7 +56,6 @@ public class RedisCache {
     public Object get(String key) {
         return get(key, NOT_EXPIRE);
     }
-
 
     public Long increment(String key) {
         return redisTemplate.opsForValue().increment(key);
@@ -111,6 +106,9 @@ public class RedisCache {
         }
     }
 
+    public void expire(String key, long expire) {
+        redisTemplate.expire(key, expire, TimeUnit.SECONDS);
+    }
 
     public void hDel(String key, Object... fields) {
         redisTemplate.opsForHash().delete(key, fields);
@@ -131,5 +129,8 @@ public class RedisCache {
     public Object rightPop(String key) {
         return redisTemplate.opsForList().rightPop(key);
     }
-
 }
+
+
+
+
