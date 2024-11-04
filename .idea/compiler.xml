@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="untitled" />
+        <module name="spring-boot-filter-interceptor" />
         <module name="spring-boot-database01" />
         <module name="spring-boot-exception" />
         <module name="spring-boot-configure01" />
@@ -33,6 +34,7 @@
       <module name="spring-boot-database01" options="-parameters" />
       <module name="spring-boot-exception" options="-parameters" />
       <module name="spring-boot-file" options="-parameters" />
+      <module name="spring-boot-filter-interceptor" options="-parameters" />
       <module name="spring-boot-logging" options="-parameters" />
       <module name="spring-boot-mp" options="-parameters" />
       <module name="spring-boot-practice" options="" />

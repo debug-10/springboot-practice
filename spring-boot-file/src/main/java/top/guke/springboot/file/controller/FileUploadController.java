@@ -35,7 +35,6 @@ public class FileUploadController {
     @Resource
     private OssTemplate ossTemplate;
 
-
     @PostMapping("/native")
     public String nativeUpload(MultipartFile file , HttpServletRequest request) {
         if (file != null) {
@@ -65,7 +64,6 @@ public class FileUploadController {
         }
     }
 
-
     @PostMapping("/minio")
     public String minioUpload(MultipartFile file) {
         if (file != null) {
@@ -86,12 +84,8 @@ public class FileUploadController {
         }
     }
 
-
     @PostMapping("/oss")
     public String ossUpload(MultipartFile file) {
         return ossTemplate.ossUpload(file);
     }
-
-
-
 }
